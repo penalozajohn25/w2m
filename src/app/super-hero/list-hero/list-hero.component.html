@@ -34,14 +34,17 @@
       <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
-          <div class="col-md-6 prod-buttom-edit" matTooltip="Editar" id="editClient">
-            <i class="fas fa-edit"></i>
-            Editar
+          <div class="row">
+            <div class="col-md-1" matTooltip="Editar" id="editClient">
+              <i class="fas fa-edit"></i>
+              Editar
+            </div>
+            <div class="col-md-1" matTooltip="Eliminar">
+              <i class="far fa-trash-alt"></i>
+              Eliminar
+            </div>
           </div>
-          <div class="col-md-6 prod-buttom-edit" matTooltip="Eliminar">
-            <i class="far fa-trash-alt"></i>
-            Eliminar
-          </div>
+
         </td>
       </ng-container>
 
