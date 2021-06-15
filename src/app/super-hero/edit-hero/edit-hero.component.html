@@ -1,0 +1,24 @@
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <mat-form-field class="example-chip-list">
+            <mat-label>Nombre del Heroe</mat-label>
+            <input matInput formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <mat-error *ngIf="submitted && f.name.errors">
+                <div *ngIf="f.name.errors.required">
+                    Por favor, ingrese nombre del Heroe
+                </div>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+
+    <mat-dialog-actions align="end">
+        <button [disabled]="loading" mat-raised-button color="primary" class="btn btn-accent">
+            Aceptar
+        </button>
+        <button mat-dialog-close mat-raised-button color="accent" class="btn btn-accent" type="button">
+            Cancelar
+        </button>
+    </mat-dialog-actions>
+
+</form>
