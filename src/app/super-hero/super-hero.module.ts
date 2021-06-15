@@ -8,6 +8,8 @@ import { DeleteHeroModalComponent } from './components/delete-hero-modal/delete-
 import { MaterialModule } from '../material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+
 @NgModule({
   declarations: [
     ListHeroComponent,
@@ -19,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     SuperHeroRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule
   ],
   entryComponents : [
     EditHeroComponent

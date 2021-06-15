@@ -1,1 +1,11 @@
-<p>delete-hero-modal works!</p>
+<h5 class="text-center"> <i class="fas fa-exclamation-triangle"></i> ¿Está seguro de eliminar el Hero Seleccionado?
+</h5>
+<mat-dialog-content class="mat-typography text-center">
+    <h2>Heroe: {{values.name}}</h2>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-button mat-raised-button color="primary" [mat-dialog-close]="true"
+        (click)="delete(values)">Confirmar</button>
+    <button mat-button mat-raised-button color="accent" mat-dialog-close>Cancelar</button>
+
+</mat-dialog-actions>

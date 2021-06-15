@@ -1,5 +1,5 @@
 <div class="container">
-
+  <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
   <div>
     <p>
       <mat-toolbar>
@@ -11,6 +11,19 @@
             <mat-label>Buscar</mat-label>
             <input matInput (keyup)="applyFilter($event)" #input>
           </mat-form-field>
+        </div>
+
+        <div class="padding-input-tolbar">
+          <form [formGroup]="heroId">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Buscar por Id</mat-label>
+                <input  formControlName="id" type="number" matInput #input>
+              </mat-form-field>
+              <button (click)="getHeroId()" mat-raised-button color="primary">Buscar</button>
+            </div>
+          </form>
+
         </div>
       </mat-toolbar>
     </p>
@@ -35,11 +48,11 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
           <div class="row">
-            <div class="col-md-1" matTooltip="Editar" id="editClient">
+            <div class="col-md-1 style-cursor" (click)="openEditForm(element)" matTooltip="Editar" id="editClient">
               <i class="fas fa-edit"></i>
               Editar
             </div>
-            <div class="col-md-1" matTooltip="Eliminar">
+            <div class="col-md-1 style-cursor" (click)="deleteHero(element)" matTooltip="Eliminar">
               <i class="far fa-trash-alt"></i>
               Eliminar
             </div>
@@ -62,7 +75,7 @@
         <div class="example-button-container">
           <button mat-fab color="primary" (click)="openForm()" matTooltip="Agregar Heroe"
             aria-label="Example icon button with a delete icon">
-            <mat-icon>face</mat-icon>
+            Agregar
           </button>
         </div>
       </div>
