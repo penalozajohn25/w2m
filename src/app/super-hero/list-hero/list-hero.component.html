@@ -8,7 +8,7 @@
         </div>
         <div class="padding-input-tolbar">
           <mat-form-field>
-            <mat-label>Buscar</mat-label>
+            <mat-label>Filtrar Heroe</mat-label>
             <input matInput (keyup)="applyFilter($event)" #input>
           </mat-form-field>
         </div>
@@ -18,12 +18,16 @@
             <div class="form-group">
               <mat-form-field>
                 <mat-label>Buscar por Id</mat-label>
-                <input  formControlName="id" type="number" matInput #input>
+                <input onkeypress="return event.charCode>=48 && event.charCode<=57" formControlName="id" type="number"
+                  matInput #input>
               </mat-form-field>
               <button (click)="getHeroId()" mat-raised-button color="primary">Buscar</button>
             </div>
           </form>
+        </div>
 
+        <div class="padding-input-tolbar">
+          <button (click)="searchHero()" mat-raised-button color="accent">Buscar por Nombre</button>
         </div>
       </mat-toolbar>
     </p>
@@ -75,7 +79,7 @@
         <div class="example-button-container">
           <button mat-fab color="primary" (click)="openForm()" matTooltip="Agregar Heroe"
             aria-label="Example icon button with a delete icon">
-            Agregar
+            Añadir
           </button>
         </div>
       </div>

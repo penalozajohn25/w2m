@@ -64,6 +64,7 @@ export class EditHeroComponent implements OnInit {
   edit() {
     this.hero;
     let bodydata = Object.assign(this.hero, this.heroForm.value);
+    bodydata.name = bodydata.name.toLocaleUpperCase();
     const sbCreate = this.heroService.updateHero(bodydata).subscribe(data => {
       this.onAdd.emit(data);
       this.dialogRef.close();
@@ -73,6 +74,7 @@ export class EditHeroComponent implements OnInit {
 
   create() {
     let bodydata = Object.assign(this.heroForm.value, {});
+    bodydata.name = bodydata.name.toLocaleUpperCase();
     const sbCreate = this.heroService.createHero(bodydata).subscribe(data => {
       this.onAdd.emit(data);
       this.dialogRef.close();

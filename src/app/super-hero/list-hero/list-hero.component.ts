@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { DeleteHeroModalComponent } from '../components/delete-hero-modal/delete-hero-modal.component';
 import { EditHeroComponent } from '../edit-hero/edit-hero.component';
 import { Hero } from '../models/hero.model';
 import { HeroService } from '../services/hero.service';
+import { catchError, debounceTime, distinctUntilChanged, finalize, switchMap, tap } from 'rxjs/operators';
+import { SearchHeroModalComponent } from '../components/search-hero-modal/search-hero-modal.component';
 
 @Component({
   selector: 'app-list-hero',
@@ -19,8 +21,8 @@ export class ListHeroComponent implements OnInit, AfterViewInit {
   paginator!: MatPaginator;
   isLoading$: Observable<boolean> | undefined;
 
-  heroId!: FormGroup;
 
+  heroId!: FormGroup;
   element: any = []
   displayedColumns: string[] = ['id', 'name', 'Acciones'];
   dataSource: any;
@@ -35,20 +37,31 @@ export class ListHeroComponent implements OnInit, AfterViewInit {
     this.heroId = this.formBuilder.group({
       id: [],
     });
+
   }
 
   getHeroId() {
     let id = this.heroId.controls['id'].value;
-    console.log(id);
+
+    if (!id) {
+      this.loadTable();
+      return;
+    }
+
     this.element = [];
-    this.heroService.getHeroId(id).subscribe(response => {
-      this.element.push(response)
+    this.heroService.getHeroId(id).pipe(
+      tap(() => ""),
+      catchError((errorMessage) => {
+        console.error('GET ERROR', errorMessage);
+        return of(id);
+      })
+    ).subscribe((response: Hero) => {
+      (!response.id) ? (this.element = []) : (this.element.push(response));
       this.dataSource = new MatTableDataSource<Hero>(this.element);
       this.dataSource.paginator = this.paginator;
       return this.dataSource;
-    }, error =>{
-      this.loadTable();
-    })
+    });
+
   }
 
   ngAfterViewInit() {
@@ -98,6 +111,13 @@ export class ListHeroComponent implements OnInit, AfterViewInit {
       this.loadTable();
     });
   }
+
+  searchHero() {
+    const dialogRef = this.dialog.open(SearchHeroModalComponent, {
+      width: "550px",
+    });
+  }
+
 }
 
 

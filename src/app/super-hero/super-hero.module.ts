@@ -8,13 +8,15 @@ import { DeleteHeroModalComponent } from './components/delete-hero-modal/delete-
 import { MaterialModule } from '../material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SearchHeroModalComponent } from './components/search-hero-modal/search-hero-modal.component'; 
 
 @NgModule({
   declarations: [
     ListHeroComponent,
     EditHeroComponent,
-    DeleteHeroModalComponent
+    DeleteHeroModalComponent,
+    SearchHeroModalComponent
   ],
   imports: [
     CommonModule,
